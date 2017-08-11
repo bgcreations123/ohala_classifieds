@@ -1,0 +1,12 @@
+<h1><%= @user.name %></h1>
+<ul>
+    <li><%= @user.name %></li>
+    <li><%= @user.email %></li>
+    <li>
+        <%= for role <- @user.roles do %>
+          <%= role.name %>&nbsp;<%= gettext("user") %>
+          &nbsp; | &nbsp;
+          <%= link "edit", to: backend_user_path(@conn, :edit_user_role, @user.id, role.id) %>
+        <% end %>
+    </li>
+</ul>

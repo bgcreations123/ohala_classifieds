@@ -1,0 +1,3 @@
+<%= link "To list", to: ads_path(@conn, :ads) %>
+<h1><%= @ad.title %></h1>
+<p><%= @ad.body %></p>

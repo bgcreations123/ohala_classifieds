@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hello OhalaClassifieds!</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+
+  <div class="container">
+    <div class="header">
+
+      <ol class="breadcrumb text-right">
+
+        <li class="pull-left">
+          <%= link "Home", to: "/" %>
+        </li>
+
+        <li class="pull-left">
+          <%= link "All Ads", to: ads_path(@conn, :ads) %>
+        </li>
+
+        <%= if @current_user do %>
+
+          <%= for role <- @current_user.roles do %>
+
+            <%= if role.name == "backend" do %>
+              <li class="pull-left">
+                <%= link "Users", to: backend_user_path(@conn, :index) %>
+              </li>
+            <% end %>
+
+            <%= if role.name == "admin" do %>
+              <li class="pull-left">
+                <%= link "My Ads", to: member_user_ads_path(@conn, :index, @current_user) %>
+              </li>
+            <% end %>
+
+          <% end %>
+
+          <span>
+            <%= link @current_user.email, to: user_path(@conn, :show, @current_user) %>
+          </span>
+          <li>&nbsp;</li>
+          <li>
+            <%= link "Sign Out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+          </li>
+
+        <% else %>
+
+          <span><%= link "Sign In", to: session_path(@conn, :new) %></span>
+          <li>&nbsp;</li>
+          <li><%= link "Register", to: registration_path(@conn, :new) %></li>
+
+        <% end %>
+
+      </ol>
+
+    </div>
+
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <span class="logo"></span>
+    </header>
+
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-success" role="alert"><%= get_flash(@conn, :success) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+
+  </div> <!-- /container -->
+  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+<%= link "Create an Ad", to: member_user_ads_path(@conn, :new, @user), class: "btn btn-md btn-primary" %>
+<%= link "Create A Profile", to: "#", class: "pull-right btn btn-md btn-primary" %>
+
+

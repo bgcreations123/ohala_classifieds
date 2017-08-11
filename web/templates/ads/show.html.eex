@@ -1,0 +1,16 @@
+<%= link "To list", to: ads_path(@conn, :index, @ad.user) %>
+
+<h1><%= @ad.title %></h1>
+<p><%= @ad.body %></p>
+
+<%= if @current_user do %>
+
+    <%= if @current_user.id == @user.id do %>
+        <%= link "Edit", to: ads_path(@conn, :edit, @current_user, @ad), class: "btn btn-primary btn-xs" %>
+    <% end %>
+
+    <%= if @current_user.id == @user.id || @current_user.authorisation == "backend" do %>
+        <%= link "Delete", to: ads_path(@conn, :delete, @ad.user, @ad), method: :delete, data: [confirm: "Really?"], class: "btn btn-danger btn-xs"%>
+    <% end %>
+
+<% end %>

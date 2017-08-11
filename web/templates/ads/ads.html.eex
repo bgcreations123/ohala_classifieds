@@ -1,0 +1,7 @@
+<ul>
+    <%= for ad <- @ads do %>
+        <li>
+            <%= link ad.title, to: ads_path(@conn, :view_ad, ad) %>
+        </li>
+    <% end %>
+</ul>

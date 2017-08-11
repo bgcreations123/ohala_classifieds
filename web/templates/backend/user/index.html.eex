@@ -1,0 +1,42 @@
+<%= link "Add User", to: backend_user_path(@conn, :new), class: "pull-right btn btn-lg btn-primary" %>
+
+<h1>Users List</h1>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Active</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <%= for user <- @users do %>
+
+            <tr>
+                <td><%= user.email %></td>
+                <td><%= user.is_active %></td>
+                <td class="text-right">
+                    <%= link "View", to: backend_user_path(@conn, :show, user), class: "btn btn-sm btn-default" %>
+                    <%= if user.name do %>
+                        <%= link "Edit", to: backend_user_path(@conn, :edit, user), class: "btn btn-sm btn-info" %>
+                    <% end %>
+                    <%= if user.id !== @current_user.id do %>
+                        <%= if user.is_active == false do %>
+                            <%= link "Activate", to: backend_user_path(@conn, :trigger_action, user), class: "btn btn-sm btn-warning" %>
+                            <%= link "Delete", to: backend_user_path(@conn, :delete, user), method: :delete, data: [confirm: "Really...?"], class: "btn btn-sm btn-danger" %>
+                        <% else %>
+                            <%= link "Deactivate", to: backend_user_path(@conn, :trigger_action, user), class: "btn btn-sm btn-warning" %>
+                        <% end %>
+                    <% end %>
+                </td>
+            </tr>
+
+        <% end %>
+
+    </tbody>
+
+</table>

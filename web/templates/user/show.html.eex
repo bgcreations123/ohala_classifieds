@@ -1,0 +1,5 @@
+<%= link "Create A Profile", to: "#", class: "pull-right btn btn-md btn-primary" %>
+
+<h2><%= @user.name %></h2>
+<p><%= @user.email %></p>
+<p><%= link "edit profile", to: "#" %></p>

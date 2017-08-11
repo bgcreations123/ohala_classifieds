@@ -1,0 +1,15 @@
+<%= if @current_user.id == @user.id do %>
+  <h1>My Posts</h1>
+  <%= link "Create new", to: ads_path(@conn, :new, @current_user) %>
+  &nbsp; | &nbsp;
+<% else %>
+  <h1><%= @user.name %>'s Ads</h1>
+<% end %>
+
+<ul>
+  <%= for ad <- @ads do %>
+    <li>
+      <%= link ad.title, to: ads_path(@conn, :show, ad.user, ad) %>
+    </li>
+  <% end %>
+</ul>
