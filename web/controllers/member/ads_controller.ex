@@ -23,10 +23,7 @@ defmodule OhalaClassifieds.Member.AdsController do
   end
 
   def new(conn, %{"user_id" => user_id}) do
-    changeset =
-      User
-      |> build_assoc(:ads)
-      |> Ads.changeset
+    changeset = User.new()
 
     user = User
     |> Repo.get!(user_id)
